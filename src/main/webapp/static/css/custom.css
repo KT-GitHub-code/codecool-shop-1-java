@@ -1,6 +1,10 @@
 .glyphicon {
     margin-right:5px;
 }
+/*Colors:
+#518abc
+
+*/
 .thumbnail
 {
     margin-bottom: 20px;
@@ -69,25 +73,32 @@
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black*/
+    background-color: #2f5476;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
+#sidenavTrigger {
+    height: 100%; /* 100% Full-height */
+    min-width: 40px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    left: 0;
+}
+
 
 /* The navigation menu links */
 .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: sandybrown;
     display: block;
     transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: #f1f1f1;
+    color: darkorange;
 }
 
 /* Position and style the close button (top right corner) */
