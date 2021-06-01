@@ -32,13 +32,13 @@ public class CartItem implements Serializable {
     }
 
     public float getSubTotalPrice(){
-        DecimalFormat df = new DecimalFormat("$#.00");
+        DecimalFormat df = new DecimalFormat("#.00");
         return Float.parseFloat(df.format(product.getDefaultPrice() * quantity));
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(product.getId());
-        oos.writeObject(quantity);
+        oos.writeInt(product.getId());
+        oos.writeInt(quantity);
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {

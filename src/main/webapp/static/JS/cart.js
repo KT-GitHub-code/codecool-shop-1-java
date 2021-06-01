@@ -23,5 +23,11 @@ fetch("http://localhost:8080/cart", {
 }
 
 function refreshCart(){
+    fetch("http://localhost:8080/cart", {
+                method: 'GET',
+                credentials: 'same-origin'
+            })
+                .then(response => response.json())
+                .then(json_response => console.log(json_response));
     console.log("Refreshing cart");
 }
