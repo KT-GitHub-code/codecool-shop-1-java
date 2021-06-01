@@ -28,14 +28,26 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductService productService = new ProductService(productDataStore,productCategoryDataStore);
+        ProductService productService = new ProductService(productDataStore, productCategoryDataStore);
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("category", productService.getProductCategory(1));
-        context.setVariable("products", productService.getProductsForCategory(1));
 
-        context.setVariable("allcategories",productCategoryDataStore.getAll());
+        if ((req.getParameter("categoryId") != null) && (req.getParameter("vendorId") == null)) {
+            int category_id = Integer.parseInt(req.getParameter("categoryId"));
+            context.setVariable("category", productService.getProductCategory(category_id));
+            context.setVariable("products", productService.getProductsForCategory(category_id));
+
+        } else if ((req.getParameter("categoryId") == null) && (req.getParameter("supplierId") != null)) {
+            int supplierId = Integer.parseInt(req.getParameter("supplierId"));
+            context.setVariable("supplier", supplierDataStore.find(supplierId));
+            context.setVariable("products", productService.getProductsForSupplier(supplierId));
+        } else {
+            context.setVariable("category", productService.getProductCategory(1));
+            context.setVariable("products", productService.getProductsForCategory(1));
+        }
+
+        context.setVariable("allcategories", productCategoryDataStore.getAll());
         context.setVariable("allsuppliers", supplierDataStore.getAll());
 
         // // Alternative setting of the template context
