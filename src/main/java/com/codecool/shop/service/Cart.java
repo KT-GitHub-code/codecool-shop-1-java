@@ -1,9 +1,8 @@
 package com.codecool.shop.service;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import com.codecool.shop.model.Product;
+
+import java.io.*;
 import java.util.*;
 
 public class Cart implements Serializable {
@@ -13,8 +12,9 @@ public class Cart implements Serializable {
     private static Cart instance;
 
     public static Cart getInstance() {
-        if (instance == null)
-            return new Cart();
+        if (instance == null) {
+            instance = new Cart();
+        }
         return instance;
     }
 
@@ -26,30 +26,43 @@ public class Cart implements Serializable {
         return orderID;
     }
 
+
+    public void addItem(Product product) {
+        addItem(new CartItem(product, 1));
+    }
+
     public void addItem(CartItem item) {
         for (CartItem itm : cartItems) {
             if (itm.getProduct().getId() == item.getProduct().getId()) {
                 itm.setQuantity(itm.getQuantity() + item.getQuantity());
+                System.out.println(this.toString());
                 return;
             }
         }
+
         cartItems.add(item);
+        System.out.println(this.toString());
+
+
     }
 
     public void removeItem(CartItem item) {
         cartItems.remove(item);
     }
 
-
     private void writeObject(ObjectOutputStream oos) throws IOException {
 
         oos.writeObject(orderID);
         oos.writeObject(cartItems);
-
+        oos.close();
     }
 
-    private void readObject(ObjectInputStream in) throws IOException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        instance = (Cart)in.readObject();
+    }
 
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
     public float getTotalPrice() {
@@ -58,5 +71,13 @@ public class Cart implements Serializable {
             cartPrice += item.getSubTotalPrice();
         }
         return cartPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "orderID=" + orderID +
+                ", cartItems=" + cartItems +
+                '}';
     }
 }
