@@ -45,14 +45,14 @@
     <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button" aria-expanded="false" aria-controls="categoriesCollapse">
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories/' + ${category.getName()}" th:text="${category.getName()}"></a></p>
+        <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
     </div>
 
 
     <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
         Suppliers </a>
     <div class="card card-body" id="suppliersCollapse">
-        <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/vendors/' + ${vendor.getName()}" th:text="${vendor.getName()}"></a></p>
+        <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/suppliers?supplierId=' + ${vendor.getId()}" th:text="${vendor.getName()}"></a></p>
     </div>
 
 </div>
