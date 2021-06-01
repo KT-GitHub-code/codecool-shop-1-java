@@ -7,6 +7,7 @@
 
     <title>Codecool Shop</title>
 
+    <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -80,7 +81,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${prod.getId()}">Add to cart</a>
                     </div>
                 </div>
             </div>
