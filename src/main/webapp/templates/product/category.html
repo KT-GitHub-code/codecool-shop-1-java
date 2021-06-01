@@ -45,26 +45,23 @@
     <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button" aria-expanded="false" aria-controls="categoriesCollapse">
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
-        </div>
+        <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories?categoryId=' + ${category.getName()}" th:text="${category.getName()}"></a></p>
+    </div>
 
 
     <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
         Suppliers </a>
     <div class="card card-body" id="suppliersCollapse">
-        <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/suppliers?supplierId=' + ${vendor.getId()}" th:text="${vendor.getName()}"></a></p>
+        <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/vendors/' + ${vendor.getName()}" th:text="${vendor.getName()}"></a></p>
     </div>
 
 </div>
 
 
 <div id="main" class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
 
     <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${categoryProducts}">
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
@@ -83,6 +80,7 @@
             </div>
         </div>
     </div>
+
 
 </div>
 
