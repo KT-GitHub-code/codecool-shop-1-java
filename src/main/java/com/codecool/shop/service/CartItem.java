@@ -45,4 +45,9 @@ public class CartItem implements Serializable {
     product = ProductDaoMem.getInstance().find((int)in.readObject());
     quantity = (int)in.readObject();
     }
+
+    @Override
+    public String toString() {
+        return quantity + " * " + product.getName();
+    }
 }

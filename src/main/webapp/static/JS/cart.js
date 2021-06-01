@@ -1,5 +1,4 @@
 init()
-let cart = new Map();
 
 function init() {
     let addToCartButtons = document.getElementsByClassName("add-to-cart-button");
@@ -10,10 +9,19 @@ function init() {
 
 function addToCart(e) {
     let productID = e.target.dataset.indexNumber;
-    if (cart.has(productID)) {
-        cart.set(productID, cart.get(productID) + 1)
-    } else {
-        cart.set(productID, 1)
-    }
-    console.log(cart);
+    let data = {'productID': productID}
+
+fetch("http://localhost:8080/cart", {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {if(response.status===200){refreshCart()}});
+}
+
+function refreshCart(){
+    console.log("Refreshing cart");
 }
