@@ -7,7 +7,6 @@
 
     <title>Codecool Shop</title>
 
-    <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -36,7 +35,7 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+    <h1 th:text="${product.name}">Codecool Shop</h1>
 </div>
 
 <div id="sidenavTrigger"></div>
@@ -47,7 +46,7 @@
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
         <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/categories?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
-        </div>
+    </div>
 
 
     <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
@@ -60,30 +59,24 @@
 
 
 <div id="main" class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
 
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                <div class="card-header">
-                    <a th:attr="href='/product?productId=' + ${prod.getId()}"><h4 class="card-title" th:text="${prod.name}">Product name</h4></a>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
-                </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${prod.getId()}">Add to cart</a>
-                    </div>
-                </div>
+    <div class="card">
+        <img class="" src="http://placehold.it/400x250/000/fff"
+             th:attr="src='/static/img/product_' + ${product.id} + '.jpg'" alt=""/>
+        <div class="card-header">
+            <h4 class="card-title" th:text="${product.name}">product name</h4>
+            <p class="card-text" th:text="${product.description}">product description... </p>
+        </div>
+        <div class="card-body">
+            <div class="card-text">
+                <p class="lead" th:text="${product.getPrice()}">100 USD</p>
+            </div>
+            <div class="card-text">
+                <a class="btn btn-success" href="#">Add to cart</a>
             </div>
         </div>
     </div>
+
 
 </div>
 
