@@ -43,16 +43,23 @@
 
     <p>This is where the payment happens...</p>
     <div>
-        <!--        <h4 class="" th:text="${products}"></h4>-->
-        <th>
-
-        </th>
-        <tb th:each="cartItem, iter: ${cartItems}">
+        <table>
+        <thead>
             <tr>
-                <td>th:text="${cartItem.getProduct().getName()}"/</td>
+               <th>Name</th>
+               <th>Quantity</th>
+               <th>Subtotal Price</th>
             </tr>
-        </tb>
-
+        </thead>
+            <tbody th:each="cartItem, iter: ${cart.getCartItems()}">
+            <tr>
+                <td th:text="${cartItem.getProduct().getName()}"></td>
+                <td th:text="${cartItem.getQuantity()}"></td>
+                <td th:text="${cartItem.getSubTotalPrice}"></td>
+            </tr>
+        </tbody>
+        </table>
+        <p th:text="${cart.getTotalPrice()}"></p>
     </div>
 
     <div th:replace="footer.html :: copy"></div>
