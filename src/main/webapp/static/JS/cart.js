@@ -1,33 +1,77 @@
 init()
 
+let cartOpen = false;
+
 function init() {
     let addToCartButtons = document.getElementsByClassName("add-to-cart-button");
     for (const addToCartButton of addToCartButtons) {
-        addToCartButton.addEventListener("click",e => {addToCart(e)})
+        addToCartButton.addEventListener("click", e => {
+            addToCart(e)
+        })
     }
+    let cartToggleButton = document.getElementById("toggle-cart-button");
+    cartToggleButton.addEventListener("click", toggleCart)
+
+}
+
+function toggleCart() {
+    cartOpen = !cartOpen;
+    let cart = document.getElementById("cart");
+    cart.classList.toggle("cart-open");
 }
 
 function addToCart(e) {
     let productID = e.target.dataset.indexNumber;
     let data = {'productID': productID}
 
-fetch("http://localhost:8080/cart", {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {if(response.status===200){refreshCart()}});
+    fetch("http://localhost:8080/cart", {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.status === 200) {
+                console.log(response)
+                refreshCart()
+            }
+        });
 }
 
-function refreshCart(){
+function refreshCart() {
     fetch("http://localhost:8080/cart", {
-                method: 'GET',
-                credentials: 'same-origin'
-            })
-                .then(response => response.json())
-                .then(json_response => console.log(json_response));
-    console.log("Refreshing cart");
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+        .then(response => response.json())
+        .then(json_response => {
+            console.log(json_response)
+            let cart = document.getElementById("cart");
+            for (let i = 0; i < json_response.items.length; i++) {
+                let domElement = document.createElement("tr");
+                console.log(json_response.items[i])
+                let jsonObj = json_response.items[i];
+
+
+                let nameElement = document.createElement("td")
+                let quantityElement = document.createElement("td")
+                let priceElement = document.createElement("td")
+                let subtotalElement = document.createElement("td")
+
+                nameElement.innerText = jsonObj.name;
+                quantityElement.innerText = jsonObj.quantity;
+                priceElement.innerText = jsonObj.price;
+                subtotalElement.innerText = jsonObj.subtotal;
+
+                domElement.appendChild(nameElement);
+                domElement.appendChild(quantityElement);
+                domElement.appendChild(priceElement);
+                domElement.appendChild(subtotalElement);
+                cart.appendChild(domElement)
+            }
+
+
+        });
 }
