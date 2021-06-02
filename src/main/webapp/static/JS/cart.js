@@ -63,9 +63,10 @@ function refreshCart() {
                 "                        <th>Unit price</th>\n" +
                 "                        <th>Subtotal</th>\n" +
                 "                    </tr>"
-
+            let domElement;
             for (let i = 0; i < json_response.items.length; i++) {
-                let domElement = document.createElement("tr");
+                domElement = document.createElement("tr");
+                domElement.classList.add('cart-table')
                 console.log(json_response.items[i]);
                 let jsonObj = json_response.items[i];
 
@@ -85,13 +86,28 @@ function refreshCart() {
                 priceElement.innerText = jsonObj.price + jsonObj.currency;
                 subtotalElement.innerText = jsonObj.subtotal + jsonObj.currency;
 
+
                 domElement.appendChild(nameElement);
                 domElement.appendChild(quantityElement);
                 domElement.appendChild(priceElement);
                 domElement.appendChild(subtotalElement);
                 cart.appendChild(domElement);
+
             }
 
+            let totalRow = document.createElement("tr");
+            totalRow.classList.add("total-row");
+            let totalTitle = document.createElement("td");
+            let total = document.createElement("td");
 
+            totalTitle.innerText = "Total: ";
+            totalTitle.classList.add("total-title");
+            total.classList.add("total-price");
+            total.innerText = json_response.totalPrice;
+
+
+            totalRow.appendChild(totalTitle);
+            totalRow.appendChild(total);
+            cart.appendChild(totalRow);
         });
 }
