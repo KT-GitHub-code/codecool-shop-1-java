@@ -70,13 +70,14 @@
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 9999; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     background-color: #2f5476;
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    transition: 0.6s; /* 0.5 second transition effect to slide in the sidenav */
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 #sidenavTrigger {
     height: 100%; /* 100% Full-height */
@@ -85,24 +86,75 @@
     left: 0;
 }
 
+.jumbotron  {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+}
+
+#main-title {
+    margin: auto;
+    color: black;
+    text-decoration: none;
+}
+
+.jumbotron h1 {
+    margin: auto;
+    color: sandybrown;
+}
+
+.jumbotron h1:hover {
+    color: darkorange;
+}
+
+.container {
+    margin-top: 15rem;
+    z-index: 3;
+}
+
 .cart-open {
-    background-color: #2f5476;
+    background-color: #3b3b3b;
     min-height: 300px;
     min-width: 400px;
     transition: 0.2s;
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
 }
 
 .cart-holder button {
+    margin: .3rem;
     position: relative;
+    color: sandybrown;
+}
+
+.cart-holder button:hover {
+    color: darkorange;
 }
 
 .cart-holder{
-    z-index: 2;
-    left: 70%;
+    z-index: 1999;
+    right: .4rem;
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 30px; /* Place content 60px from the top */
+    padding-top: 1rem; /* Place content 60px from the top */
     position: fixed; /* Stay in place */
+    margin-right: .3rem;
+
 }
+
+#cart {
+    display: none;
+    background-color: #2f5476;
+    opacity: 90%;
+    border-radius: 10px;
+    padding: .7rem;
+}
+
+#cart table th,td{
+    color: sandybrown;
+}
+
 
 .cart-wrapper {
     display: flex;

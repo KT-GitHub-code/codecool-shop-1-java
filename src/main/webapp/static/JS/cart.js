@@ -11,13 +11,19 @@ function init() {
     }
     let cartToggleButton = document.getElementById("toggle-cart-button");
     cartToggleButton.addEventListener("click", toggleCart)
+    refreshCart();
 
 }
 
 function toggleCart() {
+
     cartOpen = !cartOpen;
     let cart = document.getElementById("cart");
     cart.classList.toggle("cart-open");
+    if (cart.classList.contains("cart-open")) {
+        cart.style.display = "block";
+    } else
+        cart.style.display = "none";
 }
 
 function addToCart(e) {
