@@ -49,27 +49,40 @@ function refreshCart() {
         .then(json_response => {
             console.log(json_response)
             let cart = document.getElementById("cart");
+
+            cart.innerHTML = "<tr>\n" +
+                "                        <th>Name</th>\n" +
+                "                        <th>Quantity</th>\n" +
+                "                        <th>Unit price</th>\n" +
+                "                        <th>Subtotal</th>\n" +
+                "                    </tr>"
+
             for (let i = 0; i < json_response.items.length; i++) {
                 let domElement = document.createElement("tr");
-                console.log(json_response.items[i])
+                console.log(json_response.items[i]);
                 let jsonObj = json_response.items[i];
 
+                let nameElement = document.createElement("td");
+                let quantityElement = document.createElement("td");
+                let priceElement = document.createElement("td");
+                let subtotalElement = document.createElement("td");
 
-                let nameElement = document.createElement("td")
-                let quantityElement = document.createElement("td")
-                let priceElement = document.createElement("td")
-                let subtotalElement = document.createElement("td")
+                nameElement.classList.add("cart-item");
+                quantityElement.classList.add("cart-item");
+                priceElement.classList.add("cart-item");
+                subtotalElement.classList.add("cart-item");
+
 
                 nameElement.innerText = jsonObj.name;
                 quantityElement.innerText = jsonObj.quantity;
-                priceElement.innerText = jsonObj.price;
-                subtotalElement.innerText = jsonObj.subtotal;
+                priceElement.innerText = jsonObj.price + jsonObj.currency;
+                subtotalElement.innerText = jsonObj.subtotal + jsonObj.currency;
 
                 domElement.appendChild(nameElement);
                 domElement.appendChild(quantityElement);
                 domElement.appendChild(priceElement);
                 domElement.appendChild(subtotalElement);
-                cart.appendChild(domElement)
+                cart.appendChild(domElement);
             }
 
 
