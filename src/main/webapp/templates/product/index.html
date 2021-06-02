@@ -35,6 +35,23 @@
 </head>
 
 <body>
+<div class="cart-holder">
+    <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
+    <div class="cart-wrapper">
+        <div class="cart-inside">
+            <div class="cart">
+                <table id="cart">
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="jumbotron text-center">
     <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
@@ -44,17 +61,21 @@
 <div id="sideNavMenu" class="sidenav">
 
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button" aria-expanded="false" aria-controls="categoriesCollapse">
+    <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button"
+       aria-expanded="false" aria-controls="categoriesCollapse">
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"> <a th:attr="href='/?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
-        </div>
+        <p th:each="category,iterStat : ${allcategories}"><a th:attr="href='/?categoryId=' + ${category.getId()}"
+                                                             th:text="${category.getName()}"></a></p>
+    </div>
 
 
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false" aria-controls="suppliersCollapse">
+    <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"
+       aria-controls="suppliersCollapse">
         Suppliers </a>
     <div class="card card-body" id="suppliersCollapse">
-        <p th:each="vendor,iterStat : ${allsuppliers}"> <a th:attr="href='/?supplierId=' + ${vendor.getId()}" th:text="${vendor.getName()}"></a></p>
+        <p th:each="vendor,iterStat : ${allsuppliers}"><a th:attr="href='/?supplierId=' + ${vendor.getId()}"
+                                                          th:text="${vendor.getName()}"></a></p>
     </div>
 
 </div>
@@ -64,11 +85,11 @@
     <div class="checkout-button">
         <button id="checkout">Checkout</button>
     </div>
-    <div th:if="${category != null}" >
+    <div th:if="${category != null}">
         <strong th:text="${category.name}">Category Title</strong>
     </div>
-    <div th:if="${category == null}" >
-        <strong th:text="${supplier.getName()}">Supplier Title</strong>
+    <div th:if="${category == null}">
+        <strong th:text="${supplier.name}">Supplier Title</strong>
     </div>
 
     <div id="products" class="row">
