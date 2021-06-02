@@ -85,9 +85,41 @@
     left: 0;
 }
 
+.cart-open {
+    background-color: #2f5476;
+    min-height: 300px;
+    min-width: 400px;
+    transition: 0.2s;
+}
+
+.cart-holder button {
+    position: relative;
+}
+
+.cart-holder{
+    z-index: 2;
+    left: 70%;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 30px; /* Place content 60px from the top */
+    position: fixed; /* Stay in place */
+}
+
+.cart-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-inside {
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: 0.3s;
+}
 
 /* The navigation menu links */
 .sidenav a {
+    white-space: nowrap;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -110,11 +142,6 @@
     margin-left: 50px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-    transition: margin-left .5s;
-    padding: 20px;
-}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
