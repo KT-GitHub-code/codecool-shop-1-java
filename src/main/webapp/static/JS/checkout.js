@@ -40,7 +40,7 @@ function checkout() {
                 "<p>Street</p>" +
                 "<input id='billing-street'>" +
             "</div>" +
-            "<button id='checkout-button'>Checkout</button>" +
+            "<a href='/'><button id='checkout-button'>Checkout</button></a>" +
         "</div>")
 
     let checkoutButton = document.getElementById("checkout-button");
@@ -78,7 +78,9 @@ function getData() {
         alert("Invalid input!")
     }
     function createJson() {
-        let data = {name: name,
+        let data = {
+                    id: Date.now(),
+                    name: name,
                     email: email,
                     phoneNumber: phoneNumber,
                     shippingAddress: {
