@@ -83,8 +83,8 @@ function refreshCart() {
 
                 nameElement.innerText = jsonObj.name;
                 quantityElement.innerText = jsonObj.quantity;
-                priceElement.innerText = jsonObj.price + jsonObj.currency;
-                subtotalElement.innerText = jsonObj.subtotal + jsonObj.currency;
+                priceElement.innerText = jsonObj.price +" "+ jsonObj.currency;
+                subtotalElement.innerText = jsonObj.subtotal +" "+ jsonObj.currency;
 
 
                 domElement.appendChild(nameElement);
@@ -103,7 +103,7 @@ function refreshCart() {
             totalTitle.innerText = "Total: ";
             totalTitle.classList.add("total-title");
             total.classList.add("total-price");
-            total.innerText = json_response.totalPrice;
+            total.innerText = json_response.totalPrice + " USD";
 
 
             totalRow.appendChild(totalTitle);

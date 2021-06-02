@@ -148,7 +148,6 @@
     z-index: 1999;
     right: .4rem;
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 1rem; /* Place content 60px from the top */
     position: fixed; /* Stay in place */
     margin-right: .3rem;
 
@@ -161,6 +160,16 @@
     border-radius: 10px;
     padding: .7rem;
     border: #3b3b3b 2px solid;
+}
+
+#cart tbody th{
+    color: sandybrown;
+    border-bottom: darkorange 2px solid;
+    text-align: center;
+}
+
+#cart tbody tr th{
+    border-collapse: collapse;
 }
 
 #cart table th,td{
@@ -183,8 +192,9 @@
 .total-row {
     position: absolute;
     left: 1rem;
-    bottom: 1rem;
+    bottom: .4rem;
     width: 80%;
+    border-top: darkorange 2px solid;
 }
 
 .total-price {
