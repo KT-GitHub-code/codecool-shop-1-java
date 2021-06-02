@@ -195,7 +195,6 @@ window.onload = function () {
     });
 
 
-
 //Generate random card number from list of known test numbers
     const randomCard = function () {
         let testCards = [

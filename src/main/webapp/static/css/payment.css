@@ -117,7 +117,7 @@ input {
     border-radius: 22px;
 }
 
-#generatecard{
+#generatecard {
     cursor: pointer;
     float: right;
     font-size: 12px;
@@ -126,7 +126,7 @@ input {
     background-color: #909090;
     border-radius: 4px;
     cursor: pointer;
-    float:right;
+    float: right;
 }
 
 /* CHANGEABLE CARD ELEMENTS */
