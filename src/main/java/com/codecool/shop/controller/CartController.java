@@ -34,8 +34,9 @@ public class CartController extends HttpServlet {
             System.out.println("Adding "+ item.getProduct().getName());
             cartItem.addProperty("name", item.getProduct().getName());
             cartItem.addProperty("quantity", item.getQuantity());
-            cartItem.addProperty("price",item.getProduct().getPrice());
+            cartItem.addProperty("price",item.getProduct().getDefaultPrice());
             cartItem.addProperty("subtotal",item.getSubTotalPrice());
+            cartItem.addProperty("currency",item.getProduct().getDefaultCurrency().toString());
             cartItemsArray.add(cartItem);
         }
         returnJson.add("items", cartItemsArray);
