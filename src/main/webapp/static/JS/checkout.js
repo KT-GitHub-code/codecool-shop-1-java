@@ -25,55 +25,58 @@ function checkout() {
             "<p>City</p>" +
             "<input id='city'>" +
             "<p>ZIP Code</p>" +
-            "<input type='text' id='zip-code'>" +
+            "<input id='zip-code'>" +
             "<p>Street</p>" +
             "<input id='street'>" +
-            "<div id='checkbox'><input type='checkbox' id='checkbox-input'><p>Save this as my shipping address</p></div>" +
+            "<div id='checkbox'><input type='checkbox' id='checkbox-input'><p>Same billing address as shipping address</p></div>" +
+            "<div id='billing-address'>" +
+                "<p>Billing Address</p>" +
+                "<p>Country</p>" +
+                "<input id='billing-country'>" +
+                "<p>City</p>" +
+                "<input id='billing-city'>" +
+                "<p>ZIP Code</p>" +
+                "<input type='text' id='billing-zip-code'>" +
+                "<p>Street</p>" +
+                "<input id='billing-street'>" +
+            "</div>" +
             "<button id='checkout-button'>Checkout</button>" +
         "</div>")
 
     let checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", () => getData());
+
+    let checkBox = document.getElementById("checkbox-input");
+    checkBox.addEventListener("click", () => toggleAddressDiv())
 }
 
 function getData() {
     let firstName = document.getElementById("first-name").value;
     let lastName = document.getElementById("last-name").value;
     let name = firstName +" "+ lastName;
-    let email = document.getElementById("email");
-    let phoneNumber = document.getElementById("phone-number");
-    let country = document.getElementById("country");
-    let city = document.getElementById("city");
-    let zipCode = document.getElementById("zip-code");
-    let street = document.getElementById("street");
+    let email = document.getElementById("email").value;
+    let phoneNumber = document.getElementById("phone-number").value;
+    let country = document.getElementById("country").value;
+    let city = document.getElementById("city").value;
+    let zipCode = document.getElementById("zip-code").value;
+    let street = document.getElementById("street").value;
 
-    let checkbox = document.getElementById("checkbox-input");
+    let textInputsList = [firstName, lastName, email, country, city, street];
 
-    if (checkbox.checked) {
-        // On
-        let billingAddress = {
-            country: country,
-            city: city,
-            zipCode: zipCode,
-            street: street
-        }
+    if (checkZipCode(zipCode) &&
+        checkPhoneNumber(phoneNumber) &&
+        checkTextInputs(textInputsList)) {
+        fetch("http://localhost:8080/checkout", {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(createJson())
+        })
     } else {
-        // Off
-        let billingCountry = document.getElementById("billing-country");
-        let billingCity = document.getElementById("billing-city");
-        let billingZipCode = document.getElementById("billing-zip-code");
-        let billingStreet = document.getElementById("billing-street");
-        let billingAddress = {
-            country: billingCountry,
-            city: billingCity,
-            zipCode: billingZipCode,
-            street: billingStreet
-
-        }
+        alert("Invalid input!")
     }
-
-    validateData(checkZipCode, checkPhoneNumber, checkTextInputs);
-
     function createJson() {
         let data = {name: name,
                     email: email,
@@ -84,35 +87,72 @@ function getData() {
                         zipCode: zipCode,
                         street: street
                     },
+                    billingAddress: getBillingAddress(country, city, zipCode, street)
+        }
+        return data;
+    }
 
+}
+
+function checkPhoneNumber(phoneNumber) {
+    return !!(phoneNumber.match(/^[0-9]+$/));
+}
+
+function checkZipCode(zipCode) {
+    return !!(zipCode.match(/^[0-9]+$/) && zipCode.length === 4);
+}
+
+function checkTextInputs(textInputsList) {
+    for (const textInput of textInputsList) {
+        if (textInput.length === 0) return false;
+    }
+    return true;
+}
+
+function getBillingAddress(country, city, zipCode, street) {
+    let checkbox = document.getElementById("checkbox-input");
+    let billingAddress;
+
+    if (checkbox.checked) {
+        // On
+        billingAddress = {
+            country: country,
+            city: city,
+            zipCode: zipCode,
+            street: street
+        }
+        return billingAddress;
+    } else {
+        // Off
+        let billingCountry = document.getElementById("billing-country").value;
+        let billingCity = document.getElementById("billing-city").value;
+        let billingZipCode = document.getElementById("billing-zip-code").value;
+        let billingStreet = document.getElementById("billing-street").value;
+
+        billingAddress = {
+            country: billingCountry,
+            city: billingCity,
+            zipCode: billingZipCode,
+            street: billingStreet
+        }
+
+        let textInputsList = [billingCountry, billingCity, billingStreet];
+        if (checkTextInputs(textInputsList) &&
+        checkZipCode(billingZipCode)) {
+            return billingAddress;
+        } else {
+            alert("Invalid input!");
         }
     }
-
-    function checkZipCode() {
-        return !!(zipCode.value.match(/^[0-9]+$/) && zipCode.value.length === 4);
-    }
-
-    function checkPhoneNumber() {
-        return !!(phoneNumber.value.match(/^[0-9]+$/));
-    }
-
-    function checkTextInputs() {
-        return firstName.length !== 0 && lastName.length !== 0
-            && email.value.length !== 0 && country.value.length !== 0
-            && city.value.length !== 0 && street.value.length !== 0;
-
-    }
 }
 
-function validateData(checkZipCode, checkPhoneNumber, checkTextInputs) {
-    if (checkZipCode() &&
-        checkPhoneNumber() &&
-        checkTextInputs()) {
-        // validated
-        console.log(true);
+
+function toggleAddressDiv() {
+    let checkbox = document.getElementById("checkbox-input");
+    let billingAddressDiv = document.getElementById("billing-address");
+    if (checkbox.checked) {
+        billingAddressDiv.style.display = "none";
     } else {
-        // invalid
-        console.log(false);
+        billingAddressDiv.style.display = "block";
     }
 }
-
