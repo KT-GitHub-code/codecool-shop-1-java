@@ -38,33 +38,15 @@
     <h1>Payment</h1>
 </div>
 
-<div id="sidenavTrigger"></div>
-<div id="sideNavMenu" class="sidenav">
 
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button"
-       aria-expanded="false" aria-controls="categoriesCollapse">
-        Categories </a>
-    <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"><a
-                th:attr="href='/categories?categoryId=' + ${category.getId()}" th:text="${category.getName()}"></a></p>
-    </div>
-
-
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"
-       aria-controls="suppliersCollapse">
-        Suppliers </a>
-    <div class="card card-body" id="suppliersCollapse">
-        <p th:each="vendor,iterStat : ${allsuppliers}"><a th:attr="href='/suppliers?supplierId=' + ${vendor.getId()}"
-                                                          th:text="${vendor.getName()}"></a></p>
-    </div>
-
-</div>
 
 
 <div id="main" class="container">
 
     <p>This is where the payment happens...</p>
+    <div>
+        <h4 class="" th:text="${products}"></h4>
+    </div>
 
     <div th:replace="footer.html :: copy"></div>
 </div>
