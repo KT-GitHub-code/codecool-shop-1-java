@@ -35,7 +35,8 @@ public class PaymentPage extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        context.setVariable("products", shoppingCart.getCartItems());
+        context.setVariable("cartItems", shoppingCart.getCartItems() );
+//        context.setVariable("productNames", shoppingCart.getCartItems(). );
 
         engine.process("product/payment.html", context, resp.getWriter());
     }

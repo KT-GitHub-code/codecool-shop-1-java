@@ -39,13 +39,20 @@
 </div>
 
 
-
-
 <div id="main" class="container">
 
     <p>This is where the payment happens...</p>
     <div>
-        <h4 class="" th:text="${products}"></h4>
+        <!--        <h4 class="" th:text="${products}"></h4>-->
+        <th>
+
+        </th>
+        <tb th:each="cartItem, iter: ${cartItems}">
+            <tr>
+                <td>th:text="${cartItem.getProduct().getName()}"/</td>
+            </tr>
+        </tb>
+
     </div>
 
     <div th:replace="footer.html :: copy"></div>
