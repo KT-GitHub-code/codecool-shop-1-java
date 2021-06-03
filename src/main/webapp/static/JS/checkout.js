@@ -2,7 +2,7 @@ main()
 
 function main() {
     let checkoutButton = document.getElementById("pay");
-    //checkoutButton.addEventListener("click", () => getData());
+    checkoutButton.addEventListener("click", () => getData());
 
     let checkBox = document.getElementById("checkbox-input");
     checkBox.addEventListener("click", () => toggleAddressDiv());
