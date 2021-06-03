@@ -276,4 +276,44 @@ window.onload = function () {
     securitycode.addEventListener('focus', function () {
         document.querySelector('.creditcard').classList.add('flipped');
     });
+
+
+// Data storing
+//     const name = document.getElementById('name');
+//     const cardnumber = document.getElementById('cardnumber');
+//     const expirationdate = document.getElementById('expirationdate');
+//     const securitycode = document.getElementById('securitycode');
+
+    function getData() {
+        const nameValue = document.getElementById('name').value;
+        const cardnumberValue = document.getElementById('cardnumber').value;
+        const expirationdateValue = document.getElementById('expirationdate').value;
+        const securitycodeValue = document.getElementById('securitycode').value;
+
+        let textInputsList = [nameValue, cardnumberValue, expirationdateValue, securitycodeValue];
+
+        if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue)
+        {
+            fetch("http://localhost:8080/checkout", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(createJson())
+            })
+        }
+    else
+        {
+            alert("Invalid input!")
+        }
+
+        function createJson() {
+            let data = {}
+            return data;
+        }
+
+    }
+
+
 };
