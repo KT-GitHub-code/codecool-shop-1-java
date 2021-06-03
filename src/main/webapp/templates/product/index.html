@@ -9,7 +9,6 @@
 
     <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
-    <script src="/static/JS/checkout.js" defer></script>
     <script src="/static/JS/navbar.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -85,7 +84,7 @@
 
 <div id="main" class="container">
     <div class="checkout-button">
-        <button id="checkout" class='btn btn-info'>Checkout</button>
+        <a href="/checkout"><button id="checkout" class='btn btn-info'>Checkout</button></a>
     </div>
     <div th:if="${category != null}">
         <strong th:text="${category.name}">Category Title</strong>
