@@ -26,6 +26,9 @@ public class Cart implements Serializable {
         return orderID;
     }
 
+    public void clear(){
+        cartItems.clear();
+    }
 
     public void addItem(Product product) {
         System.out.println("Adding " + product.getName());

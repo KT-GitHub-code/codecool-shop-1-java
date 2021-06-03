@@ -49,6 +49,7 @@ public class PaymentPage extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("orderId", shoppingCart.getOrderID());
         System.out.println("loading success page");
+        shoppingCart.clear();
         engine.process("product/success.html", context, resp.getWriter());
     }
 

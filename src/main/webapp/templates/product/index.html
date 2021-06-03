@@ -38,7 +38,7 @@
 
 
 <div class="jumbotron text-center">
-    <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
+    <a href="/" id="main-title"><h1>Space ShipShop</h1></a>
     <div class="cart-holder">
         <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
         <div class="cart-wrapper">
@@ -89,13 +89,12 @@
     <div th:if="${category != null}">
         <strong th:text="${category.name}">Category Title</strong>
     </div>
-    <div th:if="${category == null}">
+    <div th:if="${supplier != null}">
         <strong th:text="${supplier.name}">Supplier Title</strong>
     </div>
 
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <p th:text="${prod.getId()}"></p>
             <div class="card">
                 <img class="" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
