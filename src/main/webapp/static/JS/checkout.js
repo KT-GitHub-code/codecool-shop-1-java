@@ -8,46 +8,51 @@ function main() {
 
 function checkout() {
     let main = document.getElementById("main");
-    main.innerHTML = null;
+    let prevMain = main.innerHTML;
+    //main.innerHTML = null;
     main.insertAdjacentHTML("beforeend", "" +
         "<div class='checkout'>" +
-            "<p>First name</p>" +
-            "<input id='first-name'>" +
-            "<p>Last name</p>" +
-            "<input id='last-name'>" +
-            "<p>Email</p>" +
-            "<input type='email' id='email'>" +
-            "<p>Phone number</p>" +
-            "<input type='tel' id='phone-number'>" +
-            "<p>Shipping Address</p>" +
-            "<p>Country</p>" +
-            "<input id='country'>" +
-            "<p>City</p>" +
-            "<input id='city'>" +
-            "<p>ZIP Code</p>" +
-            "<input id='zip-code'>" +
-            "<p>Street</p>" +
-            "<input id='street'>" +
-            "<div id='checkbox'><input type='checkbox' id='checkbox-input'><p>Same billing address as shipping address</p></div>" +
-            "<div id='billing-address'>" +
-                "<p>Billing Address</p>" +
+            "<a href='/' id='back-button'><button class='btn btn-info'>Back</button></a>" +
+            "<div class='content'>" +
+                "<p>First name</p>" +
+                "<input id='first-name'>" +
+                "<p>Last name</p>" +
+                "<input id='last-name'>" +
+                "<p>Email</p>" +
+                "<input type='email' id='email'>" +
+                "<p>Phone number</p>" +
+                "<input type='tel' id='phone-number'>" +
+                "<p id='shipping-address'>Shipping Address</p>" +
                 "<p>Country</p>" +
-                "<input id='billing-country'>" +
+                "<input id='country'>" +
                 "<p>City</p>" +
-                "<input id='billing-city'>" +
+                "<input id='city'>" +
                 "<p>ZIP Code</p>" +
-                "<input type='text' id='billing-zip-code'>" +
+                "<input id='zip-code'>" +
                 "<p>Street</p>" +
-                "<input id='billing-street'>" +
+                "<input id='street'>" +
+                "<div id='checkbox'><input type='checkbox' id='checkbox-input'><p>Same billing address as shipping address</p></div>" +
+                "<div id='billing'>" +
+                    "<p id='billing-address'>Billing Address</p>" +
+                    "<p>Country</p>" +
+                    "<input id='billing-country'>" +
+                    "<p>City</p>" +
+                    "<input id='billing-city'>" +
+                    "<p>ZIP Code</p>" +
+                    "<input type='text' id='billing-zip-code'>" +
+                    "<p>Street</p>" +
+                    "<input id='billing-street'>" +
+                "</div>" +
             "</div>" +
-            "<a href='/payment'><button id='checkout-button'>Pay</button></a>" +
+            "<div class='payment '><button id='pay' class='btn btn-info'>Pay</button></div>" +
         "</div>")
 
-    let checkoutButton = document.getElementById("checkout-button");
+    let checkoutButton = document.getElementById("pay");
     checkoutButton.addEventListener("click", () => getData());
 
     let checkBox = document.getElementById("checkbox-input");
-    checkBox.addEventListener("click", () => toggleAddressDiv())
+    checkBox.addEventListener("click", () => toggleAddressDiv());
+
 }
 
 function getData() {
@@ -148,10 +153,9 @@ function getBillingAddress(country, city, zipCode, street) {
     }
 }
 
-
 function toggleAddressDiv() {
     let checkbox = document.getElementById("checkbox-input");
-    let billingAddressDiv = document.getElementById("billing-address");
+    let billingAddressDiv = document.getElementById("billing");
     if (checkbox.checked) {
         billingAddressDiv.style.display = "none";
     } else {

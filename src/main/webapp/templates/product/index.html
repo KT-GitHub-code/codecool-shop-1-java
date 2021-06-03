@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>Codecool Shop</title>
-    <a href="/payment"><button>temp payment button</button></a>
 
     <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
@@ -86,7 +85,7 @@
 
 <div id="main" class="container">
     <div class="checkout-button">
-        <button id="checkout">Checkout</button>
+        <button id="checkout" class='btn btn-info'>Checkout</button>
     </div>
     <div th:if="${category != null}">
         <strong th:text="${category.name}">Category Title</strong>
