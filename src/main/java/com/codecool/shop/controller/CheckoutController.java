@@ -1,10 +1,13 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.service.Cart;
 import com.codecool.shop.service.CartItem;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,17 +31,22 @@ public class CheckoutController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Reader in = new BufferedReader(new InputStreamReader((req.getInputStream())));
 
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+
+
         StringBuilder sb = new StringBuilder();
         for (int c; (c = in.read()) >= 0; )
             sb.append((char) c);
         String incomeJson = sb.toString();
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonToSave = (JsonObject) jsonParser.parse(incomeJson);
-
         JsonObject cartJson = getCartJson();
-
         jsonToSave.add("cart", cartJson);
         Files.write(Paths.get(jsonToSave.get("id") + ".json"), jsonToSave.toString().getBytes());
+        context.setVariable("cartID",jsonToSave.get("id"));
+        engine.process("product/payment.html", context, resp.getWriter());
+
     }
 
     private JsonObject getCartJson() {

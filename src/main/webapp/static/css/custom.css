@@ -204,6 +204,22 @@
     bottom: .1rem;
 }
 
+.content {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+}
+.content input {
+    width: 33.3333333%;
+    margin-left: 33.3333333%;
+}
+
+#phone-number {
+    margin-bottom: 2.5rem;
+}
+
 /* The navigation menu links */
 .sidenav a {
     white-space: nowrap;
@@ -244,6 +260,16 @@
     line-height: .6rem;
 }
 
+.checkout {
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    top: 13rem;
+    background-color: white;
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
 .checkout input {
     margin-bottom: 1rem;
 }
@@ -254,7 +280,38 @@
 }
 
 .checkout #checkbox input{
-    margin: 1rem 1rem 1rem 0;
+    margin: auto 2rem auto 33.3333%;
+    width: 1rem;
+}
+
+#billing input {
+    margin-left: 0;
+}
+
+#billing-address {
+    margin-bottom: 1.5rem;
+}
+
+#shipping-address {
+    margin-bottom: .7rem;
+}
+
+#back-button {
+    margin-left: 4rem;
+}
+
+.payment {
+    width: 100%;
+    margin-bottom: 4rem;
+}
+
+.payment #pay {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    margin: 0 4rem 4rem 0;
+    width: 8rem;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
