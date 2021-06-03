@@ -8,6 +8,8 @@
     <title>Codecool Shop</title>
 
     <script src="/static/JS/sidemenu.js" defer></script>
+    <script src="/static/JS/navbar.js" defer></script>
+    <script src="/static/JS/cart.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -35,8 +37,26 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1 th:text="${product.name}">Codecool Shop</h1>
+    <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
+    <div class="cart-holder">
+        <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
+        <div class="cart-wrapper">
+            <div class="cart-inside">
+                <div class="cart">
+                    <table id="cart">
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Unit price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 <div id="sidenavTrigger"></div>
 <div id="sideNavMenu" class="sidenav">
@@ -72,7 +92,8 @@
                 <p class="lead" th:text="${product.getPrice()}">100 USD</p>
             </div>
             <div class="card-text">
-                <a class="btn btn-success" href="#">Add to cart</a>
+                <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${product.getId()}">Add
+                    to cart</a>
             </div>
         </div>
     </div>
