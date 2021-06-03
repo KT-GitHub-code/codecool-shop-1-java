@@ -9,6 +9,10 @@ window.onload = function () {
     const ccsingle = document.getElementById('ccsingle');
     const generatecard = document.getElementById('generatecard');
 
+    const finalizeButton = document.getElementById("finalize-payment");
+
+    finalizeButton.addEventListener("click", () => sendPaymentData())
+
 
     let cctype = null;
 
@@ -284,7 +288,7 @@ window.onload = function () {
 //     const expirationdate = document.getElementById('expirationdate');
 //     const securitycode = document.getElementById('securitycode');
 
-    function getData() {
+    function sendPaymentData() {
         const nameValue = document.getElementById('name').value;
         const cardnumberValue = document.getElementById('cardnumber').value;
         const expirationdateValue = document.getElementById('expirationdate').value;
@@ -292,9 +296,9 @@ window.onload = function () {
 
         let textInputsList = [nameValue, cardnumberValue, expirationdateValue, securitycodeValue];
 
-        if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue)
-        {
-            fetch("http://localhost:8080/checkout", {
+        if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue) {
+            console.log("enter if")
+            fetch("http://localhost:8080/payment", {
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: {
@@ -302,14 +306,17 @@ window.onload = function () {
                 },
                 body: JSON.stringify(createJson())
             })
-        }
-    else
-        {
-            alert("Invalid input!")
+        } else {
+            alert("Invalid input on the payment page!")
         }
 
         function createJson() {
-            let data = {}
+            let data = {
+                nameValue: nameValue,
+                cardnumberValue: cardnumberValue,
+                expirationdateValue: expirationdateValue,
+                securitycodeValue: securitycodeValue
+            }
             return data;
         }
 

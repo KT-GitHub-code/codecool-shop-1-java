@@ -49,7 +49,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        JsonObject jsonCartItem = getRequestData(req);
+        JsonObject jsonCartItem = Util.getRequestData(req);
         int pID = jsonCartItem.get("productID").getAsInt();
 
         shoppingCart.addItem(pdm.find(pID));
@@ -58,22 +58,12 @@ public class CartController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        JsonObject jsonCartItem = getRequestData(req);
+        JsonObject jsonCartItem = Util.getRequestData(req);
         int pID = jsonCartItem.get("productID").getAsInt();
 
         shoppingCart.removeItem(pdm.find(pID));
     }
 
 
-    private JsonObject getRequestData (HttpServletRequest request) throws IOException {
-        Reader in = new BufferedReader(new InputStreamReader((request.getInputStream())));
 
-        StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0; )
-            sb.append((char) c);
-        String str = sb.toString();
-
-        JsonParser jsonParser = new JsonParser();
-        return (JsonObject) jsonParser.parse(str);
-    }
 }

@@ -65,7 +65,7 @@
             <p th:text="${cart.getTotalPrice()}"></p>
         </div>
 
-        <div th:replace="footer.html :: copy"></div>
+
     </div>
 
     <div class="payment-title">
@@ -200,9 +200,10 @@
             <label for="securitycode">Security Code</label>
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
+        <button id="finalize-payment" class="btn btn-success">Finalize payment</button>
     </div>
 </div>
 
-
+    <div th:replace="footer.html :: copy"></div>
 </body>
 </html>
