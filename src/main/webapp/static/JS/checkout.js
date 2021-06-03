@@ -44,7 +44,7 @@ function checkout() {
                     "<input id='billing-street'>" +
                 "</div>" +
             "</div>" +
-            "<div class='payment '><a href='/payment'><button id='pay' class='btn btn-info'>Pay</button></a></div>" +
+            "<div class='payment '><button id='pay' class='btn btn-info'>Pay</button></div>" +
         "</div>")
 
     let checkoutButton = document.getElementById("pay");
