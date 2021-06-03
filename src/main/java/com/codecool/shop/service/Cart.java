@@ -28,26 +28,21 @@ public class Cart implements Serializable {
 
 
     public void addItem(Product product) {
-        addItem(new CartItem(product, 1));
-    }
-
-    public void addItem(CartItem item) {
+        System.out.println("Adding " + product.getName());
+        CartItem toAdd = new CartItem(product, 1);
         for (CartItem itm : cartItems) {
-            if (itm.getProduct().getId() == item.getProduct().getId()) {
-                itm.setQuantity(itm.getQuantity() + item.getQuantity());
-                System.out.println(this.toString());
+            if (itm.getProduct().getId() == toAdd.getProduct().getId()) {
+                itm.setQuantity(itm.getQuantity() + toAdd.getQuantity());
                 return;
             }
         }
-
-        cartItems.add(item);
-        System.out.println(this.toString());
-
-
+        cartItems.add(toAdd);
     }
 
-    public void removeItem(CartItem item) {
-        cartItems.remove(item);
+
+    public void removeItem(Product product) {
+        System.out.println("Removing " + product.getName());
+        cartItems.removeIf(cItem -> cItem.getProduct().getId() == product.getId());
     }
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
