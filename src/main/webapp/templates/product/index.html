@@ -10,6 +10,8 @@
 
     <script src="/static/JS/cart.js" defer></script>
     <script src="/static/JS/sidemenu.js" defer></script>
+    <script src="/static/JS/checkout.js" defer></script>
+    <script src="/static/JS/navbar.js" defer></script>
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -35,34 +37,34 @@
 </head>
 
 <body>
-<div class="cart-holder">
-    <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
-    <div class="cart-wrapper">
-        <div class="cart-inside">
-            <div class="cart">
-                <table id="cart">
-                    <tr>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Unit price</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </table>
+
+
+<div class="jumbotron text-center">
+    <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
+    <div class="cart-holder">
+        <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
+        <div class="cart-wrapper">
+            <div class="cart-inside">
+                <div class="cart">
+                    <table id="cart">
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Unit price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
-
-
 <div id="sidenavTrigger"></div>
 <div id="sideNavMenu" class="sidenav">
 
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button"
+    <a class="navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button"
        aria-expanded="false" aria-controls="categoriesCollapse">
         Categories </a>
     <div class="card card-body" id="categoriesCollapse">
@@ -71,7 +73,7 @@
     </div>
 
 
-    <a class="btn navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"
+    <a class="navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"
        aria-controls="suppliersCollapse">
         Suppliers </a>
     <div class="card card-body" id="suppliersCollapse">
@@ -83,6 +85,9 @@
 
 
 <div id="main" class="container">
+    <div class="checkout-button">
+        <button id="checkout">Checkout</button>
+    </div>
     <div th:if="${category != null}">
         <strong th:text="${category.name}">Category Title</strong>
     </div>
@@ -96,9 +101,7 @@
                 <img class="" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                 <div class="card-header">
-                    <a th:attr="href='/product?productId=' + ${prod.getId()}"><h4 class="card-title"
-                                                                                  th:text="${prod.name}">Product
-                        name</h4></a>
+                    <a th:attr="href='/product?productId=' + ${prod.getId()}"><h4 class="card-title" th:text="${prod.name}">Product name</h4></a>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
                 </div>
                 <div class="card-body">
@@ -106,8 +109,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${prod.getId()}">Add
-                            to cart</a>
+                        <a class="btn btn-success add-to-cart-button" th:attr="data-index-number='' + ${prod.getId()}">Add to cart</a>
                     </div>
                 </div>
             </div>

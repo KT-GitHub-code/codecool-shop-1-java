@@ -11,13 +11,19 @@ function init() {
     }
     let cartToggleButton = document.getElementById("toggle-cart-button");
     cartToggleButton.addEventListener("click", toggleCart)
+    refreshCart();
 
 }
 
 function toggleCart() {
+
     cartOpen = !cartOpen;
     let cart = document.getElementById("cart");
     cart.classList.toggle("cart-open");
+    if (cart.classList.contains("cart-open")) {
+        cart.style.display = "block";
+    } else
+        cart.style.display = "none";
 }
 
 function addToCart(e) {
@@ -57,9 +63,10 @@ function refreshCart() {
                 "                        <th>Unit price</th>\n" +
                 "                        <th>Subtotal</th>\n" +
                 "                    </tr>"
-
+            let domElement;
             for (let i = 0; i < json_response.items.length; i++) {
-                let domElement = document.createElement("tr");
+                domElement = document.createElement("tr");
+                domElement.classList.add('cart-table')
                 console.log(json_response.items[i]);
                 let jsonObj = json_response.items[i];
 
@@ -76,16 +83,31 @@ function refreshCart() {
 
                 nameElement.innerText = jsonObj.name;
                 quantityElement.innerText = jsonObj.quantity;
-                priceElement.innerText = jsonObj.price + jsonObj.currency;
-                subtotalElement.innerText = jsonObj.subtotal + jsonObj.currency;
+                priceElement.innerText = jsonObj.price +" "+ jsonObj.currency;
+                subtotalElement.innerText = jsonObj.subtotal +" "+ jsonObj.currency;
+
 
                 domElement.appendChild(nameElement);
                 domElement.appendChild(quantityElement);
                 domElement.appendChild(priceElement);
                 domElement.appendChild(subtotalElement);
                 cart.appendChild(domElement);
+
             }
 
+            let totalRow = document.createElement("tr");
+            totalRow.classList.add("total-row");
+            let totalTitle = document.createElement("td");
+            let total = document.createElement("td");
 
+            totalTitle.innerText = "Total: ";
+            totalTitle.classList.add("total-title");
+            total.classList.add("total-price");
+            total.innerText = json_response.totalPrice + " USD";
+
+
+            totalRow.appendChild(totalTitle);
+            totalRow.appendChild(total);
+            cart.appendChild(totalRow);
         });
 }
