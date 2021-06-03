@@ -40,7 +40,7 @@ function checkout() {
                 "<p>Street</p>" +
                 "<input id='billing-street'>" +
             "</div>" +
-            "<a href='/'><button id='checkout-button'>Checkout</button></a>" +
+            "<a href='/payment'><button id='checkout-button'>Pay</button></a>" +
         "</div>")
 
     let checkoutButton = document.getElementById("checkout-button");
