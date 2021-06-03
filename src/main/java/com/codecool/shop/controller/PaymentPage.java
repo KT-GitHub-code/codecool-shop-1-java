@@ -28,10 +28,9 @@ public class PaymentPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("Receiving request: " + req.getPathInfo());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-
 
         context.setVariable("cart", shoppingCart);
 
@@ -50,10 +49,10 @@ public class PaymentPage extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("orderId", shoppingCart.getOrderID());
         System.out.println("loading success page");
-        //engine.process("product/success.html", context, resp.getWriter());
+        engine.process("product/success.html", context, resp.getWriter());
     }
 
-    private void sendMail(){
+    private void sendMail() {
         //Session session = Session
     }
 

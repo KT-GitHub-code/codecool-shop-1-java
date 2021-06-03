@@ -11,7 +11,7 @@ function main() {
 function getData() {
     let firstName = document.getElementById("first-name").value;
     let lastName = document.getElementById("last-name").value;
-    let name = firstName +" "+ lastName;
+    let name = firstName + " " + lastName;
     let email = document.getElementById("email").value;
     let phoneNumber = document.getElementById("phone-number").value;
     let country = document.getElementById("country").value;
@@ -31,7 +31,7 @@ function getData() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(createJson())
-        })
+        }).then(response => {window.location.href = response.url})
     } else {
         alert("Invalid input!")
     }
@@ -97,7 +97,7 @@ function getBillingAddress(country, city, zipCode, street) {
 
         let textInputsList = [billingCountry, billingCity, billingStreet];
         if (checkTextInputs(textInputsList) &&
-        checkZipCode(billingZipCode)) {
+            checkZipCode(billingZipCode)) {
             return billingAddress;
         } else {
             alert("Invalid input!");

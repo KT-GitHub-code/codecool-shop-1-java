@@ -26,7 +26,7 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        engine.process("/product/checkout.html", context, resp.getWriter());
+        engine.process("product/checkout.html", context, resp.getWriter());
     }
 
     @Override
@@ -58,15 +58,14 @@ public class CheckoutController extends HttpServlet {
 
         for (CartItem item : shoppingCart.getCartItems()) {
             JsonObject cartItem = new JsonObject();
-            System.out.println("Adding "+ item.getProduct().getName());
             cartItem.addProperty("name", item.getProduct().getName());
             cartItem.addProperty("quantity", item.getQuantity());
-            cartItem.addProperty("price",item.getProduct().getPrice());
-            cartItem.addProperty("subtotal",item.getSubTotalPrice());
+            cartItem.addProperty("price", item.getProduct().getPrice());
+            cartItem.addProperty("subtotal", item.getSubTotalPrice());
             cartItemsArray.add(cartItem);
         }
         cartJson.add("items", cartItemsArray);
-        cartJson.addProperty("totalPrice",shoppingCart.getTotalPrice());
+        cartJson.addProperty("totalPrice", shoppingCart.getTotalPrice());
         return cartJson;
     }
 

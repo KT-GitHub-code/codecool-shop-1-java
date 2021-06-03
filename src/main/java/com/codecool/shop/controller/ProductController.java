@@ -52,7 +52,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("allcategories", productCategoryDataStore.getAll());
         context.setVariable("allsuppliers", supplierDataStore.getAll());
 
-        // // Alternative setting of the template context
+        // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));

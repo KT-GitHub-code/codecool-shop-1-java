@@ -282,22 +282,14 @@ window.onload = function () {
     });
 
 
-// Data storing
-//     const name = document.getElementById('name');
-//     const cardnumber = document.getElementById('cardnumber');
-//     const expirationdate = document.getElementById('expirationdate');
-//     const securitycode = document.getElementById('securitycode');
-
     function sendPaymentData() {
         const nameValue = document.getElementById('name').value;
         const cardnumberValue = document.getElementById('cardnumber').value;
         const expirationdateValue = document.getElementById('expirationdate').value;
         const securitycodeValue = document.getElementById('securitycode').value;
 
-        let textInputsList = [nameValue, cardnumberValue, expirationdateValue, securitycodeValue];
-
+        console.log("Called sendPaymentData")
         if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue) {
-            console.log("enter if")
             fetch("http://localhost:8080/payment", {
                 method: 'POST',
                 credentials: 'same-origin',
@@ -305,6 +297,9 @@ window.onload = function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(createJson())
+            }).then(response => {
+                console.log(response.url);
+                window.location.href = "http://localhost:8080/success";
             })
         } else {
             alert("Invalid input on the payment page!")
