@@ -14,12 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.List;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
     private final Cart shoppingCart = Cart.getInstance();
+    private final ProductDaoMem pdm = ProductDaoMem.getInstance();
 
 
     @Override
@@ -28,10 +27,9 @@ public class CartController extends HttpServlet {
         JsonObject returnJson = new JsonObject();
         JsonArray cartItemsArray = new JsonArray();
 
-        System.out.println(shoppingCart.getCartItems().size());
         for (CartItem item : shoppingCart.getCartItems()) {
             JsonObject cartItem = new JsonObject();
-            System.out.println("Adding "+ item.getProduct().getName());
+            cartItem.addProperty("id", item.getProduct().getId());
             cartItem.addProperty("name", item.getProduct().getName());
             cartItem.addProperty("quantity", item.getQuantity());
             cartItem.addProperty("price",item.getProduct().getDefaultPrice());
@@ -51,18 +49,21 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDaoMem pdm = ProductDaoMem.getInstance();
-        Reader in = new BufferedReader(new InputStreamReader((req.getInputStream())));
-
-        StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0; )
-            sb.append((char) c);
-        String str = sb.toString();
-
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonCartItem = (JsonObject) jsonParser.parse(str);
+        JsonObject jsonCartItem = Util.getRequestData(req);
         int pID = jsonCartItem.get("productID").getAsInt();
 
         shoppingCart.addItem(pdm.find(pID));
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        JsonObject jsonCartItem = Util.getRequestData(req);
+        int pID = jsonCartItem.get("productID").getAsInt();
+
+        shoppingCart.removeItem(pdm.find(pID));
+    }
+
+
+
 }

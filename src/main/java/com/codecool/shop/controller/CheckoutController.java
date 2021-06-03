@@ -24,15 +24,15 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+        engine.process("/product/checkout.html", context, resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("checkout doPost");
         Reader in = new BufferedReader(new InputStreamReader((req.getInputStream())));
-
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        WebContext context = new WebContext(req, resp, req.getServletContext());
 
 
         StringBuilder sb = new StringBuilder();
@@ -43,10 +43,12 @@ public class CheckoutController extends HttpServlet {
         JsonObject jsonToSave = (JsonObject) jsonParser.parse(incomeJson);
         JsonObject cartJson = getCartJson();
         jsonToSave.add("cart", cartJson);
-        Files.write(Paths.get(jsonToSave.get("id") + ".json"), jsonToSave.toString().getBytes());
-        context.setVariable("cartID",jsonToSave.get("id"));
-        engine.process("product/payment.html", context, resp.getWriter());
 
+        Files.write(Paths.get(shoppingCart.getOrderID() + ".json"), jsonToSave.toString().getBytes());
+
+
+        System.out.println("redirection to payment");
+        resp.sendRedirect("/payment");
     }
 
     private JsonObject getCartJson() {

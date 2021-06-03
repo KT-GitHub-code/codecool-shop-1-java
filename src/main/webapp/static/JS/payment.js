@@ -9,6 +9,10 @@ window.onload = function () {
     const ccsingle = document.getElementById('ccsingle');
     const generatecard = document.getElementById('generatecard');
 
+    const finalizeButton = document.getElementById("finalize-payment");
+
+    finalizeButton.addEventListener("click", () => sendPaymentData())
+
 
     let cctype = null;
 
@@ -276,4 +280,47 @@ window.onload = function () {
     securitycode.addEventListener('focus', function () {
         document.querySelector('.creditcard').classList.add('flipped');
     });
+
+
+// Data storing
+//     const name = document.getElementById('name');
+//     const cardnumber = document.getElementById('cardnumber');
+//     const expirationdate = document.getElementById('expirationdate');
+//     const securitycode = document.getElementById('securitycode');
+
+    function sendPaymentData() {
+        const nameValue = document.getElementById('name').value;
+        const cardnumberValue = document.getElementById('cardnumber').value;
+        const expirationdateValue = document.getElementById('expirationdate').value;
+        const securitycodeValue = document.getElementById('securitycode').value;
+
+        let textInputsList = [nameValue, cardnumberValue, expirationdateValue, securitycodeValue];
+
+        if (nameValue && cardnumberValue && expirationdateValue && securitycodeValue) {
+            console.log("enter if")
+            fetch("http://localhost:8080/payment", {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(createJson())
+            })
+        } else {
+            alert("Invalid input on the payment page!")
+        }
+
+        function createJson() {
+            let data = {
+                nameValue: nameValue,
+                cardnumberValue: cardnumberValue,
+                expirationdateValue: expirationdateValue,
+                securitycodeValue: securitycodeValue
+            }
+            return data;
+        }
+
+    }
+
+
 };

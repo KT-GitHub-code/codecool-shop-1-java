@@ -34,8 +34,6 @@
 
     <script src="/static/JS/payment.js" defer></script>
     <script src="/static/JS/navbar.js" defer></script>
-    <script src="/static/JS/cart.js" defer></script>
-    <script src="/static/JS/sidemenu.js" defer></script>
 
 </head>
 
@@ -43,51 +41,10 @@
 
 <div class="jumbotron text-center">
     <a href="/" id="main-title"><h1>Codecool Shop</h1></a>
-    <div class="cart-holder">
-        <button id="toggle-cart-button" type="button" class="btn btn-info">Cart</button>
-        <div class="cart-wrapper">
-            <div class="cart-inside">
-                <div class="cart">
-                    <table id="cart">
-                        <tr>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Unit price</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="sidenavTrigger"></div>
-<div id="sideNavMenu" class="sidenav">
-
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="navBarDropButton" data-toggle="collapse" href="#categoriesCollapse" role="button"
-       aria-expanded="false" aria-controls="categoriesCollapse">
-        Categories </a>
-    <div class="card card-body" id="categoriesCollapse">
-        <p th:each="category,iterStat : ${allcategories}"><a th:attr="href='/?categoryId=' + ${category.getId()}"
-                                                             th:text="${category.getName()}"></a></p>
-    </div>
-
-
-    <a class="navBarDropButton" data-toggle="collapse" href="#suppliersCollapse" role="button" aria-expanded="false"
-       aria-controls="suppliersCollapse">
-        Suppliers </a>
-    <div class="card card-body" id="suppliersCollapse">
-        <p th:each="vendor,iterStat : ${allsuppliers}"><a th:attr="href='/?supplierId=' + ${vendor.getId()}"
-                                                          th:text="${vendor.getName()}"></a></p>
-    </div>
-
 </div>
 
 <div id="main" class="container">
     <div class="cart-container">
-        <p>This is where the payment happens...</p>
         <div>
             <table>
                 <thead>
@@ -108,7 +65,7 @@
             <p th:text="${cart.getTotalPrice()}"></p>
         </div>
 
-        <div th:replace="footer.html :: copy"></div>
+
     </div>
 
     <div class="payment-title">
@@ -243,9 +200,10 @@
             <label for="securitycode">Security Code</label>
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
+        <button id="finalize-payment" class="btn btn-success">Finalize payment</button>
     </div>
 </div>
 
-
+    <div th:replace="footer.html :: copy"></div>
 </body>
 </html>
