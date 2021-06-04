@@ -1,6 +1,4 @@
-package com.codecool.shop.service;
-
-import com.codecool.shop.model.Product;
+package com.codecool.shop.model;
 
 import java.io.*;
 import java.util.*;
@@ -31,7 +29,6 @@ public class Cart implements Serializable {
     }
 
     public void addItem(Product product) {
-        System.out.println("Adding " + product.getName());
         CartItem toAdd = new CartItem(product, 1);
         for (CartItem itm : cartItems) {
             if (itm.getProduct().getId() == toAdd.getProduct().getId()) {
@@ -44,7 +41,6 @@ public class Cart implements Serializable {
 
 
     public void removeItem(Product product) {
-        System.out.println("Removing " + product.getName());
         cartItems.removeIf(cItem -> cItem.getProduct().getId() == product.getId());
     }
 

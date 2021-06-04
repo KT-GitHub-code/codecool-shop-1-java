@@ -299,7 +299,7 @@ window.onload = function () {
                 body: JSON.stringify(createJson())
             }).then(response => {
                 console.log(response.url);
-                window.location.href = "http://localhost:8080/success";
+                window.location.href = response.url;
             })
         } else {
             alert("Invalid input on the payment page!")

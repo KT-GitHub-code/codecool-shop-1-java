@@ -1,8 +1,8 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.service.Cart;
-import com.codecool.shop.service.CartItem;
+import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.CartItem;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
